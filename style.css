@@ -1,0 +1,12 @@
+body {
+  background-color: lightgrey;
+}
+#container {
+  display: flex;
+  width: 40rem;
+  height: 20rem;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
