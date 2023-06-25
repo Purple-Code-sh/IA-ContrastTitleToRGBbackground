@@ -9,20 +9,22 @@
     <script src="main.js" type="module"></script>
   </head>
   <body>
-    <script src="jscolor.js"></script>
-    <p>
-      For text INPUTS, you can keep with classic HTML attributes:
-      <input
-        onChange="update(this.jscolor, '#pr3')"
-        onInput="update(this.jscolor, '#pr4')"
-        value="CCFFAA"
-        data-jscolor="{alpha:0.7}"
-      />
-    </p>
-    <div id="pr4" style="display: inline-block; padding: 1em">
-      <h1>Constrast</h1>
-    </div>
+    <section>
+      <div id="input">
+        <p>Click and choose a color:</p>
+        <input
+          onInput="update(this.jscolor, '#pr4')"
+          value="CCFFAA"
+          data-jscolor="{alpha:1}"
+          id="colorInput"
+        />
+      </div>
+      <div id="pr4" class="container">
+        <h1>Constrast</h1>
+      </div>
+    </section>
 
+    <script src="jscolor.js"></script>
     <script>
       function update(picker, selector) {
         document.querySelector(selector).style.background =

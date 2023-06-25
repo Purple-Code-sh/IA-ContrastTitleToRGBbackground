@@ -1,7 +1,25 @@
 body {
-  background-color: lightgrey;
+  background-color: #ffeffe;
 }
-#pr4 {
+
+section {
+  display: flex;
+  align-items: baseline;
+}
+
+#input {
+  display: flex;
+  align-items: baseline;
+  margin-left: 2rem;
+}
+
+#colorInput {
+  height: 2rem;
+  border-radius: 2rem;
+  margin-left: 1rem;
+  background-color: #cfcfcf;
+}
+.container {
   display: flex;
   width: 40rem;
   height: 20rem;
