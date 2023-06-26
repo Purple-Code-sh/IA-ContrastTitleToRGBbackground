@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
     <title>RGB</title>
     <script src="main.js" type="module"></script>
   </head>
@@ -12,27 +13,20 @@
     <section>
       <div id="input">
         <p>Click and choose a color:</p>
-        <input
-          onInput="update(this.jscolor, '#pr4')"
-          value="CCFFAA"
-          data-jscolor="{alpha:1}"
-          id="colorInput"
-        />
+        <input value="CCFFAA" data-jscolor="{alpha:1}" id="colorInput" />
       </div>
       <div id="pr4" class="container">
         <h1>Constrast</h1>
       </div>
     </section>
 
-    <script src="jscolor.js"></script>
+    <!-- <script src="jscolor.js"></script>
     <script>
       function update(picker, selector) {
         document.querySelector(selector).style.background =
           picker.toBackground();
       }
-
-      // triggers 'onInput' and 'onChange' on all color pickers when they are ready
       jscolor.trigger("input change");
-    </script>
+    </script> -->
   </body>
 </html>
