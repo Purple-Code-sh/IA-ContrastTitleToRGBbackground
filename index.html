@@ -33,52 +33,112 @@
 
       network.train([
         //Black case
-        { input: { red: 0, green: 0, blue: 0 }, output: { color: 1 } },
+        {
+          input: { red: 0, green: 0, blue: 0 },
+          output: { titleColor: 1, r: 1, g: 1, b: 1 },
+        },
 
         //White case
-        { input: { red: 1, green: 1, blue: 1 }, output: { color: 0 } },
+        {
+          input: { red: 1, green: 1, blue: 1 },
+          output: { titleColor: 0, r: 0, g: 0, b: 0 },
+        },
 
         //red case
-        { input: { red: 1, green: 0, blue: 0 }, output: { color: 1 } },
+        {
+          input: { red: 1, green: 0, blue: 0 },
+          output: { titleColor: 1, r: 0, g: 1, b: 0.28235 },
+        },
 
         //Green case
-        { input: { red: 0.0196, green: 1, blue: 0 }, output: { color: 0 } },
+        {
+          input: { red: 0.021, green: 1, blue: 0 },
+          output: { titleColor: 0, r: 1, g: 0, b: 0.5255 },
+        },
 
         //Blue case
-        { input: { red: 0.1789, green: 0, blue: 1 }, output: { color: 1 } },
+        {
+          input: { red: 0.1789, green: 0, blue: 1 },
+          output: { titleColor: 1, r: 1, g: 0.8862, b: 0 },
+        },
 
         //Pink case
-        { input: { red: 1, green: 0, blue: 0.9544 }, output: { color: 0 } },
+        {
+          input: { red: 1, green: 0, blue: 0.9544 },
+          output: { titleColor: 0, r: 0.3137, g: 1, b: 0 },
+        },
+
+        //Light Yellow case
+        {
+          input: { red: 0.9665, green: 1, blue: 0.265 },
+          output: { titleColor: 0, r: 0.6588, g: 0.2706, b: 1 },
+        },
+
+        //Aqua case
+        {
+          input: { red: 0.345, green: 0.861, blue: 1 },
+          output: { titleColor: 0, r: 1, g: 0.6666, b: 0.349 },
+        },
+
+        //Light orange
+        {
+          input: { red: 1, green: 0.67075, blue: 0.325 },
+          output: { titleColor: 0, r: 0.3294, g: 0.8235, b: 1 },
+        },
+
+        //Light brown
+        {
+          input: { red: 1, green: 0.7373, blue: 0.6353 },
+          output: { titleColor: 0, r: 0.6392, g: 1, b: 0.94118 },
+        },
+
+        //Purple
+        {
+          input: { red: 0.63024, green: 0.435, blue: 1 },
+          output: { titleColor: 0, r: 1, g: 0.97255, b: 0.43922 },
+        },
+
+        //Light Purple
+        {
+          input: { red: 0.83585, green: 0.685, blue: 1 },
+          output: { titleColor: 0, r: 1, g: 0.9961, b: 0.6902 },
+        },
 
         //Gray case
         {
           input: { red: 0.395, green: 0.395, blue: 0.395 },
-          output: { color: 1 },
+          output: { titleColor: 1, r: 0.4, g: 0.4, b: 0.4 },
         },
       ]);
 
-      //For color picker
+      // ----- For color picker ----- .
       function update(picker, selector) {
         document.querySelector(selector).style.background =
           picker.toBackground();
 
-        console.log("r:", picker.channels.r / 255);
-        console.log("g:", picker.channels.g / 255);
-        console.log("b:", picker.channels.b / 255);
+        // console.log("r:", picker.channels.r / 255);
+        // console.log("g:", picker.channels.g / 255);
+        // console.log("b:", picker.channels.b / 255);
 
-        // Obtaining rgb channels from color picker
+        // ----- Obtaining rgb channels from color picker ----- .
         var colorObteined = {
           red: picker.channels.r / 255,
           green: picker.channels.g / 255,
           blue: picker.channels.b / 255,
         };
 
-        // Prediction
+        // ----- Prediction ----- .
         var result = network.run(colorObteined);
         //console.log(result);
+        var resultRGBstring = `rgb(${result.r * 255} , ${result.g * 255}, ${
+          result.b * 255
+        })`;
+        //console.log(resultRGBstring);
 
-        // Seting title color depending on neural network result
-        if (result.color > 0.5) {
+        document.querySelector(".container").style.borderColor =
+          resultRGBstring;
+        // ----- Seting title color depending on neural network result ----- .
+        if (result.titleColor > 0.5) {
           document.querySelector("h1").style.color = "white";
           //console.log("mayor");
         } else {
