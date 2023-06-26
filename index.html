@@ -32,10 +32,60 @@
       //For neural network
       var network = new brain.NeuralNetwork();
 
+      network.train([
+        //Black case
+        { input: { red: 0, green: 0, blue: 0 }, output: { color: 1 } },
+
+        //White case
+        { input: { red: 1, green: 1, blue: 1 }, output: { color: 0 } },
+
+        //red case
+        { input: { red: 1, green: 0, blue: 0 }, output: { color: 1 } },
+
+        //Green case
+        { input: { red: 0.0196, green: 1, blue: 0 }, output: { color: 0 } },
+
+        //Blue case
+        { input: { red: 0.1789, green: 0, blue: 1 }, output: { color: 1 } },
+
+        //Pink case
+        { input: { red: 1, green: 0, blue: 0.9544 }, output: { color: 0 } },
+
+        //Gray case
+        {
+          input: { red: 0.395, green: 0.395, blue: 0.395 },
+          output: { color: 1 },
+        },
+      ]);
+
       //For color picker
       function update(picker, selector) {
         document.querySelector(selector).style.background =
           picker.toBackground();
+
+        console.log("r:", picker.channels.r / 255);
+        console.log("g:", picker.channels.g / 255);
+        console.log("b:", picker.channels.b / 255);
+
+        // Obtaining rgb channels from color picker
+        var colorObteined = {
+          red: picker.channels.r / 255,
+          green: picker.channels.g / 255,
+          blue: picker.channels.b / 255,
+        };
+
+        // Prediction
+        var result = network.run(colorObteined);
+        //console.log(result);
+
+        // Seting title color depending on neural network result
+        if (result.color > 0.5) {
+          document.querySelector("h1").style.color = "white";
+          //console.log("mayor");
+        } else {
+          document.querySelector("h1").style.color = "black";
+          //console.log("menor");
+        }
       }
       jscolor.trigger("input change");
     </script>
